@@ -124,48 +124,54 @@ namespace WpfApp3
                 MessageBox.Show("Отчет успешно сохранен!");
             }
         }
-        
-        //ВТОРОЙ ВАРИАНТ СОХРАНЕНИЯ ВСЕГО DATAGRID
 
-        //private void SaveReportByStatus(string status)
+        //ВТОРОЙ ВАРИАНТ СОХРАНЕНИЯ ОТЧЕТА
+
+        //private void SaveMaterialMinBatchReport_Click(object sender, RoutedEventArgs e)
         //{
-        //    var filteredRequests = db.Request.Where(r => r.requestStatus == status).ToList();
-        //    int totalCount = filteredRequests.Count;
+        //    var materials = db.Materials.ToList();
 
-        //    var completed = filteredRequests.Where(r => r.startDate.HasValue && r.completionDate.HasValue).ToList();
-
-        //    double? avgDuration = completed.Any()
-        //        ? (double?)completed.Average(r => (r.completionDate.Value - r.startDate.Value).TotalMinutes)
-        //        : null;
-
-        //    var problemStats = db.Request
-        //        .GroupBy(r => r.problemDescryption)
-        //        .Select(g => new { ProblemDescription = g.Key, Count = g.Count() })
-        //        .ToList();
-
-        //    var lines = new List<string>
+        //    var reportLines = new List<string>
         //        {
-        //            $"Отчет по заявкам со статусом \"{status}\"",
-        //            $"Всего заявок: {totalCount}",
-        //            avgDuration.HasValue
-        //                ? $"Среднее время выполнения: {Math.Round(avgDuration.Value)} минут"
-        //                : "Среднее время выполнения: Н/Д (не заполнены даты)",
+        //            "Отчет по стоимости минимальной партии материалов",
         //            "",
-        //            "Статистика по неисправностям:"
+        //            "Наименование\tТип\tНа складе\tМин. ост.\tВ уп.\tЦена/ед.\tСтоимость мин. партии (руб.)"
         //        };
 
-        //    lines.AddRange(problemStats.Select(s => $"- {s.ProblemDescription}: {s.Count} заявок"));
-
-        //    var saveDialog = new Microsoft.Win32.SaveFileDialog
+        //    foreach (var material in materials)
         //    {
-        //        FileName = $"Отчет_{status}.txt",
+        //        decimal stock = material.stockQuantity;
+        //        decimal minRequired = material.minRequiredQuantity;
+        //        decimal unitPrice = material.unitPrice;
+        //        decimal packageQty = material.packageQuantity;
+
+        //        decimal cost = 0.00m;
+
+        //        if (stock < minRequired)
+        //        {
+        //            decimal deficit = minRequired - stock;
+        //            decimal packagesNeeded = Math.Ceiling(deficit / packageQty);
+        //            decimal purchaseQty = packagesNeeded * packageQty;
+        //            cost = purchaseQty * unitPrice;
+        //        }
+
+        //        // Безопасное округление
+        //        string costFormatted = cost.ToString("F2");
+
+        //        reportLines.Add($"{material.name}\t{material.type}\t{stock}\t{minRequired}\t{packageQty}\t{unitPrice:F2}\t{costFormatted}");
+        //    }
+
+        //    var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+        //    {
+        //        FileName = "МинимальнаяПартия_Материалы.txt",
         //        Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*",
         //        Title = "Сохранить отчет"
         //    };
 
-        //    if (saveDialog.ShowDialog() == true)
+        //    if (saveFileDialog.ShowDialog() == true)
         //    {
-        //        System.IO.File.WriteAllLines(saveDialog.FileName, lines);
+        //        string path = saveFileDialog.FileName;
+        //        System.IO.File.WriteAllLines(path, reportLines);
         //        MessageBox.Show("Отчет успешно сохранен!");
         //    }
         //}
