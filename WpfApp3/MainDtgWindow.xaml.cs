@@ -67,6 +67,30 @@ namespace WpfApp3
             mainDtg.ItemsSource = filteredRequests;
         }
 
+        //[TestClass]
+        //public class SimpleFilterTests
+        //{
+        //    [TestMethod]
+        //    public void FilterRequestsByCarModel_ShouldReturnMatchingRequests()
+        //    {
+        //        // Arrange
+        //        var window = new MainDtgWindow();
+        //        var requests = new List<Request>
+        //    {
+        //        new Request { carModel = "Toyota Corolla" },
+        //        new Request { carModel = "Ford Focus" },
+        //        new Request { carModel = "Hyundai Solaris" }
+        //    };
+
+        //        // Act
+        //        var result = window.FilterRequestsByCarModel(requests, "ford");
+
+        //        // Assert
+        //        Assert.AreEqual(1, result.Count);
+        //        Assert.AreEqual("Ford Focus", result[0].carModel);
+        //    }
+        //}
+
         private void SaveReport_Click(object sender, RoutedEventArgs e)
         {
 
